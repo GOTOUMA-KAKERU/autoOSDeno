@@ -30,7 +30,15 @@
             result: "i32" 
         }
     });
-
+    /*
+    // libXTest ライブラリを読み込む
+    const libXTest = Deno.dlopen("libxtst.so.6", {
+        XTestFakeButtonEvent: {
+            parameters: ["pointer", "u32", "i32", "u64"],
+            result: "i32",
+        },
+        });
+    */
     // Xサーバーに接続
     const display = libX11.symbols.XOpenDisplay(null);
     
@@ -64,19 +72,19 @@ export function MoveMouse(dest_x: number, dest_y: number){
     const src_width = 0; // 移動元の幅
     const src_height = 0; // 移動元の高さ
 
-    libX11.symbols.XWarpPointer(
-    display,
-    rootWindow,
-    rootWindow,
-    src_x,
-    src_y,
-    src_width,
-    src_height,
-    dest_x,
-    dest_y
-    );
+    libX11.symbols.XWarpPointer(display,rootWindow,rootWindow,src_x,src_y,src_width,src_height,dest_x,dest_y);
+
     console.log("Moved mouse to", dest_x, dest_y);
     libX11.symbols.XFlush(display);
     return 0;
 
 }
+/*
+export function ClickMouse(button: number){
+    libXTest.symbols.XTestFakeButtonEvent(display, button, 1, BigInt(0));
+    libX11.symbols.XFlush(display);
+    // ボタン解放をシミュレート
+    libXTest.symbols.XTestFakeButtonEvent(display, button, 0, BigInt(0));
+    libX11.symbols.XFlush(display);
+    return 0;
+}*/
