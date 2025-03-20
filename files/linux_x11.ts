@@ -56,13 +56,9 @@ export function GetMouse(){
     const maskReturn = new Uint32Array(1);
 
     // XQueryPointer を実行
-    const result = libX11.symbols.XQueryPointer(display,rootWindow,rootReturn,childReturn,rootX,rootY,winX,winY,maskReturn,);
+    libX11.symbols.XQueryPointer(display,rootWindow,rootReturn,childReturn,rootX,rootY,winX,winY,maskReturn,);
 
-    if (result) {
         return [rootX[0], rootY[0]];
-    } else {
-        return 1;
-    }
 }
 export function MoveMouse(dest_x: number, dest_y: number){
 
