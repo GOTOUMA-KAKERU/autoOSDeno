@@ -85,8 +85,8 @@ export function ClickMouse(button: number){
     return 0;
 }
 
-export function ChangeMouse(button: number){
-    libXTest.symbols.XTestFakeButtonEvent(display, button, 0, BigInt(0));
+export function ChangeMouse(button: number,doing: number){
+    libXTest.symbols.XTestFakeButtonEvent(display, button, doing, BigInt(0));
     libX11.symbols.XFlush(display);
     return 0;
 }

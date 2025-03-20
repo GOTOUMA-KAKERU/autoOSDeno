@@ -27,9 +27,9 @@ export function ClickMouse(button: number){
     }
     return 0;
 }
-export function ChangeMouse(button: number){
+export function ChangeMouse(button: number,doing: number){
     if(osType == "linux"){
-        const mouseposition = forlinux_x11.ChangeMouse(button);
+        const mouseposition = forlinux_x11.ChangeMouse(button,doing);
         return mouseposition;
     }
 }
