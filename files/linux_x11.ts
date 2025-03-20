@@ -30,15 +30,15 @@
             result: "i32" 
         }
     });
-    /*
+    
     // libXTest ライブラリを読み込む
-    const libXTest = Deno.dlopen("libxtst.so.6", {
+    const libXTest = Deno.dlopen("libXtst.so.6", {
         XTestFakeButtonEvent: {
             parameters: ["pointer", "u32", "i32", "u64"],
             result: "i32",
         },
         });
-    */
+    
     // Xサーバーに接続
     const display = libX11.symbols.XOpenDisplay(null);
     
@@ -79,7 +79,7 @@ export function MoveMouse(dest_x: number, dest_y: number){
     return 0;
 
 }
-/*
+
 export function ClickMouse(button: number){
     libXTest.symbols.XTestFakeButtonEvent(display, button, 1, BigInt(0));
     libX11.symbols.XFlush(display);
@@ -87,4 +87,10 @@ export function ClickMouse(button: number){
     libXTest.symbols.XTestFakeButtonEvent(display, button, 0, BigInt(0));
     libX11.symbols.XFlush(display);
     return 0;
-}*/
+}
+
+export function ChangeMouse(button: number){
+    libXTest.symbols.XTestFakeButtonEvent(display, button, 0, BigInt(0));
+    libX11.symbols.XFlush(display);
+    return 0;
+}

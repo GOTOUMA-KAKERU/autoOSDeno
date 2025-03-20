@@ -23,7 +23,13 @@ export function MoveMouse(dest_x: number, dest_y: number){
 
 export function ClickMouse(button: number){
     if(osType == "linux"){
-        //forlinux_x11.ClickMouse(button);
+        forlinux_x11.ClickMouse(button);
     }
     return 0;
+}
+export function ChangeMouse(button: number){
+    if(osType == "linux"){
+        const mouseposition = forlinux_x11.ChangeMouse(button);
+        return mouseposition;
+    }
 }
